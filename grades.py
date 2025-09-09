@@ -4,8 +4,6 @@ from selenium.webdriver.support.ui import Select
 import time
 
 def PrintGrades(driver):
-    # navbar_toggle = driver.find_element(By.CLASS_NAME, "navbar-toggle")
-    # navbar_toggle.click()
     dropdown_toggle = driver.find_element(By.CLASS_NAME, "dropdown-toggle")
     dropdown_toggle.click()
     grades_elem = driver.find_element(By.PARTIAL_LINK_TEXT, "Ukupni")
@@ -19,3 +17,4 @@ def PrintGrades(driver):
         cells = row.find_elements(By.TAG_NAME, "td")
         print("| Predmet: " + cells[0].text + " | Ocene: " + cells[1].text + " | Prosecna ocena: " + cells[2].text) 
     print("_______________________________________________")
+    driver.get("https://smartdnevnik.smart.edu.rs/login")
