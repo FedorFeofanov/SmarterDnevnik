@@ -2,8 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import time
-import login, grades
+import login, grades, scheduled_tests
 
 options = webdriver.FirefoxOptions()
 options.add_argument('-headless')
@@ -17,6 +16,8 @@ while(True):
     if(login_input and password_input):
         login.Login(driver, login_input, password_input)
         driver.implicitly_wait(10)
-        print(grades.PrintGrades(driver))
+        print(grades.Grades(driver))
+        login.Login(driver, login_input, password_input)
+        print(scheduled_tests.Tests(driver))
 driver.implicitly_wait(10)
 driver.close()
