@@ -1,7 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 import login, grades, scheduled_tests
 
 options = webdriver.FirefoxOptions()
@@ -19,5 +16,3 @@ while(True):
         print(grades.Grades(driver))
         login.Login(driver, login_input, password_input)
         print(scheduled_tests.Tests(driver))
-driver.implicitly_wait(10)
-driver.close()
