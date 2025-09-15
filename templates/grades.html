@@ -1,17 +1,43 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <title>Grades</title>
     <!-- <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet"> -->
      <style>
-        p{
+        table, th, td{
             text-align: center;
+            border: 1px solid black;
+        }
+        th{
+            background-color: gray;
+        }
+        table{
+            border-radius: 5px;
+            margin: auto;
         }
      </style>
 </head>
 <body>
-    {% for grade in grades %}
-        <p>{{ grade[0] }}  {{ grade[1] }}  {{ grade[2] }}</p>
-    {% endfor %}
-    <p></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Grades</th>
+                <th>Avg</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in grades %}
+                <tr>
+                    <td>{{ grade[0] }}</td>
+                    <td>{{ grade[1] }}</td>
+                    <td>{{ grade[2] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
