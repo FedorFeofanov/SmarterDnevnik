@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests</title>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        table {
+            border-collapse: collapse; /* Merges cell borders */
+            width: 80%; /* Sets a responsive width */
+            max-width: 800px; /* Prevents the table from getting too wide */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden; /* Ensures the rounded corners are applied */
+        }
+
+        th, td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #ddd; /* Light separator line */
+        }
+
+        thead {
+            background: linear-gradient(145deg, #007BFF, #0056b3);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa; /* Alternating row color */
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef; /* Highlights the row on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Upcoming Tests</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Teacher</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for test in tests %}
+                <tr>
+                    <td>{{ test[0] }}</td>
+                    <td>{{ test[1] }}</td>
+                    <td>{{ test[2] }}</td>
+                    <td>{{ test[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

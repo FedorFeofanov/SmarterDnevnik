@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <style>
+        body {
+            background-color: #f0f2f5; /* A light gray background for contrast */
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 40px; /* Adds space between the buttons */
+        }
+
+        button {
+            /* Make the buttons big */
+            font-size: 24px;
+            padding: 20px 40px;
+
+            /* Make the buttons round */
+            border-radius: 50px;
+            border: none; /* Removes the default button border */
+            cursor: pointer; /* Changes the cursor to a pointer on hover */
+            color: white; /* White text color */
+            text-transform: uppercase; /* Makes the text uppercase */
+            font-weight: bold;
+
+            /* Make the buttons beautiful */
+            background: linear-gradient(145deg, #007BFF, #0056b3); /* A beautiful blue gradient */
+            box-shadow: 6px 6px 12px #b8b8b8, -6px -6px 12px #ffffff; /* Gives a 3D effect */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+        }
+
+        button:hover {
+            transform: translateY(-5px); /* Lifts the button slightly on hover */
+            box-shadow: 8px 8px 16px #a0a0a0, -8px -8px 16px #ffffff; /* Deeper shadow on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <a href="/grades"><button>Grades</button></a>
+        <a href="/tests"><button>Tests</button></a>
+    </div>
+</body>
+</html>
