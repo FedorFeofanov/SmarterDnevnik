@@ -20,8 +20,14 @@ tests = []
 
 async def pull_grades_tests():
     global grades, tests, LOGIN, PASSWORD
-    grades, tests = fetch_grades_tests(driver=driver, login=LOGIN, password=PASSWORD)
-    return grades, tests
+    try:
+        grades, tests = fetch_grades_tests(driver=driver, login=LOGIN, password=PASSWORD)
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        grades = None
+        tests = None
+    finally:
+        return grades, tests
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
@@ -33,8 +39,24 @@ async def index(request: Request):
 async def sign_in(request: Request, login: str = Form(), password: str = Form()):
     global grades, tests, LOGIN, PASSWORD
     LOGIN, PASSWORD = login, password
+    return RedirectResponse(url="/loading/", status_code=303)
+
+@app.get("/loading/", response_class=HTMLResponse)
+async def loading_page(request: Request):
+    return templates.TemplateResponse(
+        request=request, name="loading.html"
+    )
+
+@app.get("/api/data/")
+async def get_data():
+    global grades, tests, LOGIN, PASSWORD
     grades, tests = await pull_grades_tests()
-    return RedirectResponse(url="/navigation/", status_code=303)
+    if grades == None and tests == None:
+        print("this is an error")
+        return {"error": "Failed to fetch data. Please check your credentials."}
+    print("this is not")
+    return {"message": "Data fetched successfully", "grades_count": len(grades), "tests_count": len(tests)}
+
 
 @app.get("/navigation/", response_class=HTMLResponse)
 async def grades_report(request: Request):

@@ -2,6 +2,8 @@
 from selenium.webdriver.common.by import By
 
 def Grades_Tests(driver):
+    if not driver.find_element(By.CLASS_NAME, "dropdown-toggle"):
+        raise ValueError('Incorrect login or password.')
     dropdown_toggle = driver.find_element(By.CLASS_NAME, "dropdown-toggle")
     dropdown_toggle.click()
     grades_elem = driver.find_element(By.XPATH, "/html/body/app-root/header/main-navbar/div[2]/div/div/parent-student-nav/div/div[2]/ul/li[1]/ul/li[1]/a")
