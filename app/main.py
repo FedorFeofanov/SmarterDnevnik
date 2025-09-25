@@ -1,15 +1,13 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fetcher.main import get_driver, fetch_grades_tests
+
+signed_in = False
 
 driver = get_driver()
 
 app = FastAPI()
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
 
 templates = Jinja2Templates(directory="templates")
 
@@ -22,6 +20,8 @@ async def pull_grades_tests():
     global grades, tests, LOGIN, PASSWORD
     try:
         grades, tests = fetch_grades_tests(driver=driver, login=LOGIN, password=PASSWORD)
+        global signed_in 
+        signed_in = True
     except Exception as e:
         print(f"Error fetching data: {e}")
         grades = None
@@ -66,12 +66,18 @@ async def grades_report(request: Request):
 
 @app.get("/grades/", response_class=HTMLResponse)
 async def grades_report(request: Request):
+    global signed_in
+    if not signed_in:
+        return RedirectResponse(url="/", status_code=303)
     global grades
     return templates.TemplateResponse(
         request=request, name="grades.html", context={"grades": grades}
     )
 @app.get("/tests/", response_class=HTMLResponse)
 async def tests_schedule(request: Request):
+    global signed_in
+    if not signed_in:
+        return RedirectResponse(url="/", status_code=303)
     global tests
     return templates.TemplateResponse(
         request=request, name="tests.html", context={"tests": tests}
