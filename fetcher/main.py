@@ -1,13 +1,14 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 #import fetcher.slogin as slogin, grades, scheduled_tests
 from fetcher import slogin, grades, scheduled_tests, grades_tests
 
 
 def get_driver():
-    options = webdriver.FirefoxOptions()
-    options.add_argument('-headless')
-    driver = webdriver.Firefox(options=options)
-    driver.set_window_size(1280, 720)
+    options = ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--window-size=1280,720') 
+    driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(3)
     driver.get("https://smartdnevnik.smart.edu.rs/login")
     return driver
